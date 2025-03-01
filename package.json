@@ -2,7 +2,7 @@
   "name": "ussr-theme",
   "displayName": "USSR Theme",
   "description": "Play USSR theme on startup",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.97.0"
   },
@@ -11,37 +11,57 @@
   ],
   "activationEvents": [
     "onStartupFinished"
-  ],  "main": "./extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "ussr-bg-play.toggleAudio",
-        "title": "Toggle USSR Audio"
+    ],  "main": "./extension.js",
+    "contributes": {
+      "commands": [
+        {
+          "command": "ussr-bg-play.toggleAudio",
+          "title": "Toggle USSR Audio"
+        }
+      ],
+      "keybindings": [
+        {
+          "key": "ctrl+cmd+shift+alt+p", 
+          "mac": "ctrl+cmd+shift+option+p",
+          "command": "ussr-bg-play.toggleAudio",
+          "when": "editorTextFocus"
+        }
+      ],
+      "configuration": {
+        "type": "object",
+        "title": "USSR BG Play Settings",
+        "properties": {
+          "ussr-bg-play.playOnStartup": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to play the theme audio on startup."
+          },
+          "ussr-bg-play.volume": {
+            "type": "number",
+            "default": 50,
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Volume level (0–100)."
+          }
+        }
       }
-    ],
-    "keybindings": [
-      {
-        "key": "ctrl+cmd+shift+alt+p", 
-        "mac": "ctrl+cmd+shift+option+p",
-        "command": "ussr-bg-play.toggleAudio",
-        "when": "editorTextFocus"
-      }
-    ]
-  },
-  "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "vscode-test"
-  },
-  "devDependencies": {
-    "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
-    "@types/vscode": "^1.97.0",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1",
-    "eslint": "^9.19.0"
-  },
-  "dependencies": {
-    "play-sound": "^1.1.6"
+    },
+    "icon": "media/icon.png",
+    "scripts": {
+      "lint": "eslint .",
+      "pretest": "npm run lint",
+      "test": "vscode-test"
+    },
+    "devDependencies": {
+      "@types/mocha": "^10.0.10",
+      "@types/node": "20.x",
+      "@types/vscode": "^1.97.0",
+      "@vscode/test-cli": "^0.0.10",
+      "@vscode/test-electron": "^2.4.1",
+      "eslint": "^9.19.0"
+    },
+    "dependencies": {
+      "play-sound": "^1.1.6"
+    }
   }
-}
+  
